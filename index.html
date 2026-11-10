@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font-awesome cdn  (icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+        integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- tailwind css  -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <title>Sériescope</title>
+</head>
+
+<body class="bg-[#080808] text-[#FAFAFA] px-4 lg:px-8 ">
+    <header class="py-6 text-[25px]">
+        <strong ><span class=" bg-[#EEEEEE] p-2 rounded-md text-[#080808] mr-2 " ><i class="fa-solid fa-clapperboard"></i></span>Sériescope</strong>
+    </header>
+    <main>
+        <section>
+            <h1 class="font-bold text-[30px]">Explore les séries TV</h1>
+            <p class="text-[#BABABA] ">Retrouve tes séries préférées et enrichis le catalogue.</p>
+        </section>
+        <section class="bg-[#212020] rounded-lg p-4 border border-[#5c5959] mt-6 ">
+            <h2 class="font-bold text-[20px]">Ajouter une série</h2>
+            <p class="text-[#BABABA] ">Les champs marqués d’un * sont obligatoires.</p>
+            <form class="my-5 space-y-3 grid sm:grid-cols-1 lg:grid-cols-8 gap-4 ">
+                <div class="lg:col-span-4">
+                    <label for="nom">Nom de la série *</label> <br>
+                    <input  type="text" name="nom" id="nom" placeholder="Ex. the Bear" class="rounded-lg p-2 border border-[#5c5959] mt-2 w-[100%]">
+                </div>
+                <div class="lg:col-span-4">
+                    <label for="Genre">Genre(s) * <span>séparés par des virgules</span></label> <br>
+                    <input type="text" name="Genre" id="Genre" placeholder="Ex. Drama, Comédie" class="rounded-lg p-2 border border-[#5c5959] mt-2 w-[100%]">
+                </div>
+                <div class="lg:col-span-8">
+                    <label for="Description">Description <span>facultative</span></label> <br>
+                    <textarea name="Description" id="Description"
+                        placeholder="Résume la série en quelques mots…" class="rounded-lg p-2 border border-[#5c5959] mt-2 w-[100%]"></textarea>
+                </div>
+                <button type="submit" class="rounded-lg p-2 bg-[#EEEEEE] text-black w-[100%] col-span-1">＋ Ajouter la série</button>
+            </form>
+        </section>
+        <section class="mt-6 space-y-2">
+            <h2 class="font-bold text-[20px]">Catalogue des séries</h2>
+            <p class="text-[#BABABA] ">Recherche par nom ou explore un genre.</p>
+            <form class="bg-[#212020] rounded-lg p-4 border border-[#5c5959] mt-6 space-y-4  grid sm:grid-cols-5 lg:grid-cols-6 gap-4 items-end ">
+                <div class="sm:col-span-5  lg:col-span-3">
+                    <label for="Recherche">Recherche</label> <br>
+                    <input type="text" id="Recherche" placeholder="Ex. Breaking Bad " class="rounded-lg p-2 border border-[#5c5959] mt-2 w-[100%] ">
+                </div>
+                <div class="sm:col-span-3 lg:col-span-2">
+                    <label for="Genre">Genre</label> <br>
+                    <select name="Genre" id="Genre" class="rounded-lg p-2 border border-[#5c5959] bg-[#212020] mt-2 w-[100%] ">
+                        <option value="">Tous les genres</option>
+                        <option value="Comédie">Comédie</option>
+                        <option value="Drama">Drama</option>
+                    </select>
+                </div>
+                <button type="button" id="Réinitialiser" class="rounded-lg p-2 border border-[#5c5959] sm:col-span-2 lg:col-span-1  mb-4 ">↻ Réinitialiser</button>
+            </form>
+            
+
+
+        </section>
+    </main>
+</body>
+
+</html>
