@@ -88,3 +88,26 @@ function RemplirGenres(series) {
         })
     })
 }
+
+// filtrer les series par les genres et rechercher par nom
+function Filtrer_rechercher() {
+    const genre = document.getElementById("select_Genre").value;
+    const nom = document.getElementById("Recherche").value;
+    let series_filter = series.filter(S => {
+        return ((S.genres.some(g => g === genre) || genre === "") && (S.name.toLowerCase().includes(nom.trim().toLowerCase())));
+    })
+
+    Afficher(series_filter);
+
+}
+
+// Réinitialiser filter et recherche
+function Réinitialiser() {
+    document.getElementById("select_Genre").value = "";
+    document.getElementById("Recherche").value ="";
+    Filtrer_rechercher() ;
+}
+
+document.getElementById("select_Genre").addEventListener("change", () => { Filtrer_rechercher() });
+document.getElementById("Recherche").addEventListener("input", () => { Filtrer_rechercher() });
+document.getElementById("Réinitialiser").addEventListener("click", () => { Réinitialiser() });
