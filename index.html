@@ -33,8 +33,8 @@
                     <input  type="text" name="nom" id="nom" placeholder="Ex. the Bear" class="rounded-lg p-2 border border-[#5c5959] mt-2 w-[100%]">
                 </div>
                 <div class="lg:col-span-4">
-                    <label for="Genre">Genre(s) * <span>séparés par des virgules</span></label> <br>
-                    <input type="text" name="Genre" id="Genre" placeholder="Ex. Drama, Comédie" class="rounded-lg p-2 border border-[#5c5959] mt-2 w-[100%]">
+                    <label for="input_Genre">Genre(s) * <span>séparés par des virgules</span></label> <br>
+                    <input type="text" name="input_Genre" id="input_Genre" placeholder="Ex. Drama, Comédie" class="rounded-lg p-2 border border-[#5c5959] mt-2 w-[100%]">
                 </div>
                 <div class="lg:col-span-8">
                     <label for="Description">Description <span>facultative</span></label> <br>
@@ -44,7 +44,7 @@
                 <button type="submit" class="rounded-lg p-2 bg-[#EEEEEE] text-black w-[100%] col-span-1">＋ Ajouter la série</button>
             </form>
         </section>
-        <section class="mt-6 space-y-2">
+        <section id="AfficherFilms" class="mt-6 space-y-2">
             <h2 class="font-bold text-[20px]">Catalogue des séries</h2>
             <p class="text-[#BABABA] ">Recherche par nom ou explore un genre.</p>
             <form class="bg-[#212020] rounded-lg p-4 border border-[#5c5959] mt-6 space-y-4  grid sm:grid-cols-5 lg:grid-cols-6 gap-4 items-end ">
@@ -53,20 +53,28 @@
                     <input type="text" id="Recherche" placeholder="Ex. Breaking Bad " class="rounded-lg p-2 border border-[#5c5959] mt-2 w-[100%] ">
                 </div>
                 <div class="sm:col-span-3 lg:col-span-2">
-                    <label for="Genre">Genre</label> <br>
-                    <select name="Genre" id="Genre" class="rounded-lg p-2 border border-[#5c5959] bg-[#212020] mt-2 w-[100%] ">
+                    <label for="select_Genre">Genre</label> <br>
+                    <select name="select_Genre" id="select_Genre" class="rounded-lg p-2 border border-[#5c5959] bg-[#212020] mt-2 w-[100%] ">
                         <option value="">Tous les genres</option>
-                        <option value="Comédie">Comédie</option>
-                        <option value="Drama">Drama</option>
                     </select>
                 </div>
                 <button type="button" id="Réinitialiser" class="rounded-lg p-2 border border-[#5c5959] sm:col-span-2 lg:col-span-1  mb-4 ">↻ Réinitialiser</button>
             </form>
-            
+            <span id="num_series" hidden class="text-[#BABABA]"></span>
+            <div id="cards_films" class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 ">
+
+            </div>
+
 
 
         </section>
+        <section id="detail" hidden>
+            <h1>hhhhhhhhhhhhhhhhh</h1>
+
+        </section>
     </main>
+
+    <script src="./js/script.js"></script>
 </body>
 
 </html>
