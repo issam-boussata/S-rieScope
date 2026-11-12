@@ -27,19 +27,22 @@
         <section class="bg-[#212020] rounded-lg p-4 border border-[#5c5959] mt-6 ">
             <h2 class="font-bold text-[20px]">Ajouter une série</h2>
             <p class="text-[#BABABA] ">Les champs marqués d’un * sont obligatoires.</p>
-            <form class="my-5 space-y-3 grid sm:grid-cols-1 lg:grid-cols-8 gap-4 ">
+            <form id="form_ajouter" class="my-5 space-y-3 grid sm:grid-cols-1 lg:grid-cols-8 gap-4 ">
                 <div class="lg:col-span-4">
                     <label for="nom">Nom de la série *</label> <br>
                     <input  type="text" name="nom" id="nom" placeholder="Ex. the Bear" class="rounded-lg p-2 border border-[#5c5959] mt-2 w-[100%]">
+                    <p id="nom_message" hidden class="text-red-400 ml-4"></p>
                 </div>
                 <div class="lg:col-span-4">
                     <label for="input_Genre">Genre(s) * <span>séparés par des virgules</span></label> <br>
                     <input type="text" name="input_Genre" id="input_Genre" placeholder="Ex. Drama, Comédie" class="rounded-lg p-2 border border-[#5c5959] mt-2 w-[100%]">
+                    <p id="genre_message" hidden class="text-red-400 ml-4"></p>
                 </div>
                 <div class="lg:col-span-8">
                     <label for="Description">Description <span>facultative</span></label> <br>
                     <textarea name="Description" id="Description"
-                        placeholder="Résume la série en quelques mots…" class="rounded-lg p-2 border border-[#5c5959] mt-2 w-[100%]"></textarea>
+                    placeholder="Résume la série en quelques mots…" class="rounded-lg p-2 border border-[#5c5959] mt-2 w-[100%]"></textarea>
+                    <p id="discription_message" hidden class="text-red-400 ml-4"></p>
                 </div>
                 <button type="submit" class="rounded-lg p-2 bg-[#EEEEEE] text-black w-[100%] col-span-1">＋ Ajouter la série</button>
             </form>

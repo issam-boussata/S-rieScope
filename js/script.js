@@ -43,7 +43,7 @@ function Afficher(data_series) {
         });
 
         // remplir data
-        image_film.src = film.image.original;
+        image_film.src = typeof (film.image) === "object" ? film.image.original : `https://static1.srcdn.com/wordpress/wp-content/uploads/2023/01/shrinking-new-tv-poster.jpg`;
         image_film.alt = film.name;
         nom_film.textContent = film.name;
         discription.innerHTML = film.summary;
@@ -89,6 +89,16 @@ function RemplirGenres(series) {
     })
 }
 
+// decharger les champs du form 
+function Vidage_champs(champs) {
+
+    champs.forEach(champ => {
+        champ.value = "";
+    })
+}
+// ================ filtrer et rechrcher les series =================
+
+
 // filtrer les series par les genres et rechercher par nom
 function Filtrer_rechercher() {
     const genre = document.getElementById("select_Genre").value;
@@ -103,11 +113,70 @@ function Filtrer_rechercher() {
 
 // Réinitialiser filter et recherche
 function Réinitialiser() {
-    document.getElementById("select_Genre").value = "";
-    document.getElementById("Recherche").value ="";
-    Filtrer_rechercher() ;
+   const genre = document.getElementById("select_Genre");
+    const recherche = document.getElementById("Recherche");
+    Vidage_champs([genre ,recherche ])
+    Filtrer_rechercher();
 }
 
 document.getElementById("select_Genre").addEventListener("change", () => { Filtrer_rechercher() });
 document.getElementById("Recherche").addEventListener("input", () => { Filtrer_rechercher() });
 document.getElementById("Réinitialiser").addEventListener("click", () => { Réinitialiser() });
+
+
+// ================ Ajouter une serie =================
+function ValiderChamps() {
+    const nom = document.getElementById("nom");
+    const Genre = document.getElementById("input_Genre");
+    const Description = document.getElementById("Description");
+
+    const discription_message = document.getElementById("discription_message");
+    const genre_message = document.getElementById("genre_message");
+    const nom_message = document.getElementById("nom_message");
+
+    // valider nom
+    if (!nom.value.trim()) {
+        nom_message.removeAttribute("hidden");
+        nom_message.textContent = "entrer le nom de serie";
+    } else {
+        nom_message.setAttribute("hidden", "");
+    }
+    // valider Genre
+    if (!Genre.value.trim()) {
+        genre_message.removeAttribute("hidden");
+        genre_message.textContent = "entrer le genre(s) de serie";
+    } else {
+        genre_message.setAttribute("hidden", "");
+    }
+    // valider discription
+    if (Description.value.trim() === "") {
+        discription_message.removeAttribute("hidden");
+        discription_message.textContent = "entrer la discription d'une serie";
+    } else {
+        discription_message.setAttribute("hidden", "");
+    }
+
+    if (!nom.value.trim() || !Genre.value.trim() || Description.value.trim() === "") return false;
+
+
+    return { name: nom.value.trim(), genres: Genre.value.trim().split(","), summary: Description.value.trim() };
+}
+
+// Ajouter apres du valider les champs
+document.getElementById("form_ajouter").addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (ValiderChamps()) {
+        const serie_data = ValiderChamps();
+        series.push(serie_data);
+        console.log(serie_data);
+        Afficher(series);
+
+        const nom = document.getElementById("nom");
+        const Genre = document.getElementById("input_Genre");
+        const Description = document.getElementById("Description");
+        Vidage_champs([nom , Genre , Description]) ;
+    }
+
+
+
+})
