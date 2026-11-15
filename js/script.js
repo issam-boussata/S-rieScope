@@ -17,6 +17,7 @@ async function getFilms() {
 
 getFilms();
 
+
 // ================ Afficher series =================
 function Afficher(data_series) {
     // let num_series = data_series.length ;
@@ -55,7 +56,7 @@ function Afficher(data_series) {
         image_film.className = "w-[100%] h-60 rounded-t-lg lg:h-100";
         discription.className = "text-[#BABABA] mx-3 my-3 line-clamp-2";
 
-        containner.addEventListener("click", () => { detail() })
+        containner.addEventListener("click", () => { AfficherDetail(film) })
         // append 
         containner.append(image_film, nom_film, div_genres, discription);
         cards_films.append(containner);
@@ -175,8 +176,37 @@ document.getElementById("form_ajouter").addEventListener("submit", (e) => {
         const Genre = document.getElementById("input_Genre");
         const Description = document.getElementById("Description");
         Vidage_champs([nom , Genre , Description]) ;
+        document.getElementById("ajouter_message").removeAttribute("hidden")
+        setTimeout(()=> {
+            document.getElementById("ajouter_message").setAttribute("hidden" , "")
+        },2000)
     }
 
 
 
 })
+
+
+// ================ Afficher Detail d'une serie =================
+
+function AfficherDetail(serie){
+
+    console.log(serie);
+    
+    document.getElementById("detail").removeAttribute("hidden") ;
+    document.getElementById("AfficherFilms").setAttribute("hidden" , "") ;
+    document.getElementById("section_ajouter").setAttribute("hidden" , "") ;
+    document.getElementById("section_hero").setAttribute("hidden" , "") ;
+
+    document.getElementById("image_serie").src = serie.image.original ;
+    document.getElementById("name_serie").textContent = serie.name ;
+    serie.genres.forEach( g => {
+        const genre = document.createElement("p") ;
+        genre.textContent = g ;
+        document.getElementById("div_genre").append(genre) ;
+    })
+    document.getElementById("discription").innerHTML = serie.summary ;
+
+    
+
+}

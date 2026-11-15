@@ -20,11 +20,11 @@
         <strong ><span class=" bg-[#EEEEEE] p-2 rounded-md text-[#080808] mr-2 " ><i class="fa-solid fa-clapperboard"></i></span>Sériescope</strong>
     </header>
     <main>
-        <section>
+        <section id="section_hero"> 
             <h1 class="font-bold text-[30px]">Explore les séries TV</h1>
             <p class="text-[#BABABA] ">Retrouve tes séries préférées et enrichis le catalogue.</p>
         </section>
-        <section class="bg-[#212020] rounded-lg p-4 border border-[#5c5959] mt-6 ">
+        <section id="section_ajouter" class="bg-[#212020] rounded-lg p-4 border border-[#5c5959] mt-6 ">
             <h2 class="font-bold text-[20px]">Ajouter une série</h2>
             <p class="text-[#BABABA] ">Les champs marqués d’un * sont obligatoires.</p>
             <form id="form_ajouter" class="my-5 space-y-3 grid sm:grid-cols-1 lg:grid-cols-8 gap-4 ">
@@ -45,7 +45,8 @@
                     <p id="discription_message" hidden class="text-red-400 ml-4"></p>
                 </div>
                 <button type="submit" class="rounded-lg p-2 bg-[#EEEEEE] text-black w-[100%] col-span-1">＋ Ajouter la série</button>
-            </form>
+            </form>  
+            <p id="ajouter_message" class="bg-[#155724] text-[#d4edda] p-3 hidden " > ce serie est ajouter avec succes</p>
         </section>
         <section id="AfficherFilms" class="mt-6 space-y-2">
             <h2 class="font-bold text-[20px]">Catalogue des séries</h2>
@@ -72,7 +73,35 @@
 
         </section>
         <section id="detail" hidden>
-            <h1>hhhhhhhhhhhhhhhhh</h1>
+            <img id="image_serie" src="" alt="image">
+            <div id="div_genre">
+                
+            </div>
+            <h2 id="name_serie"></h2>
+            <div id="average_dates_runtime">
+
+            </div>
+            <hr>
+            <p id="discription"></p>
+            <hr>
+            <div id="information_generales">
+                <div id="type_network_ended">
+
+                </div>
+                <div id="lang_premie_averageTime">
+
+                </div>
+            </div>
+            <hr>
+            <div id="IMDB_ID">
+
+            </div>
+            <div id="TVMaze_id" ></div>
+            <div id="official_webSite">
+                
+            </div>
+
+
 
         </section>
     </main>
