@@ -1,26 +1,20 @@
-import api from './services/api.js' ;
+import {getSeries} from './services/serieService.js' ;
 
 let series = [];
-async function getFilms() {
-    try {
-        const res = await api.get(`/series`);
-        const data = res.data;
 
-        console.log(data);
-        
+async function AfficherSeries() {
+    try{
+        const res = await getSeries() ;
+        Afficher(res.data) ;
 
-        series = data.slice(0, 20);
-        Afficher(series);
-        RemplirGenres(series);
-        // data.map(data =>console.log(data) )
-
-    } catch (error) {
-        console.error(error.message);
-
+    }catch(error){
+        console.error(error);
     }
 }
 
-getFilms();
+
+
+AfficherSeries();
 
 
 // ================ Afficher series =================
