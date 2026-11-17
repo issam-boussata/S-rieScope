@@ -1,8 +1,13 @@
+import api from './services/api.js' ;
+
 let series = [];
 async function getFilms() {
     try {
-        const res = await fetch(`https://api.tvmaze.com/shows?limit=10`);
-        const data = await res.json();
+        const res = await api.get(`/series`);
+        const data = res.data;
+
+        console.log(data);
+        
 
         series = data.slice(0, 20);
         Afficher(series);
