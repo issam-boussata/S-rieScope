@@ -1,15 +1,25 @@
-import {getSeries} from './services/serieService.js' ;
+import { getSeries, getSeriesFilter } from './services/serieService.js';
+import { Remplir_options_select, Filtrer_rechercher } from "./ui/filters.js";
 import { Afficher } from "./ui/cards.js";
 
 let series = [];
 
 // ================ Afficher series =================
 async function AfficherSeries() {
-    try{
-        const res = await getSeries() ;
-        Afficher(res.data) ;
+    try {
+        const res = await getSeries();
 
-    }catch(error){
+        series = res.data;
+
+        // afficher les series
+        Afficher(series);
+
+        // Remplir les option des select des filter dynamique
+        Remplir_options_select((series.map(data => data.genres).flat()), document.getElementById('select_Genre'));
+        Remplir_options_select((series.map(data => data.language)), document.getElementById('select_Langue'));
+
+
+    } catch (error) {
         console.error(error);
     }
 }
@@ -18,65 +28,17 @@ AfficherSeries();
 
 
 
-
-// remplir select du genre 
-
-function RemplirGenres(series) {
-    if (!series) return;
-    let tableauGenres = [];
-    const select = document.getElementById("select_Genre");
-
-
-    series.forEach(serie => {
-        serie.genres.forEach(genre => {
-            if (!tableauGenres.some(g => g === genre || !tableauGenres.length)) {
-                const option = document.createElement("option");
-                option.textContent = genre;
-                option.value = genre;
-
-                select.append(option);
-
-            }
-            tableauGenres.push(genre);
-
-
-        })
-    })
-}
-
-// decharger les champs du form 
-function Vidage_champs(champs) {
-
-    champs.forEach(champ => {
-        champ.value = "";
-    })
-}
 // ================ filtrer et rechrcher les series =================
 
+document.getElementById("select_Genre").addEventListener("change", (e) => { Afficher(Filtrer_rechercher(series)) });
+document.getElementById("select_Langue").addEventListener("change", () => { Afficher(Filtrer_rechercher(series)) });
+document.getElementById("Recherche").addEventListener("input", () => { Afficher(Filtrer_rechercher(series)) });
+document.getElementById("Réinitialiser").addEventListener("click", () => {
+    document.getElementById("filter_form").reset();
+    Afficher(series)
+});
 
-// filtrer les series par les genres et rechercher par nom
-function Filtrer_rechercher() {
-    const genre = document.getElementById("select_Genre").value;
-    const nom = document.getElementById("Recherche").value;
-    let series_filter = series.filter(S => {
-        return ((S.genres.some(g => g === genre) || genre === "") && (S.name.toLowerCase().includes(nom.trim().toLowerCase())));
-    })
 
-    Afficher(series_filter);
-
-}
-
-// Réinitialiser filter et recherche
-function Réinitialiser() {
-   const genre = document.getElementById("select_Genre");
-    const recherche = document.getElementById("Recherche");
-    Vidage_champs([genre ,recherche ])
-    Filtrer_rechercher();
-}
-
-document.getElementById("select_Genre").addEventListener("change", () => { Filtrer_rechercher() });
-document.getElementById("Recherche").addEventListener("input", () => { Filtrer_rechercher() });
-document.getElementById("Réinitialiser").addEventListener("click", () => { Réinitialiser() });
 
 
 // ================ Ajouter une serie =================
@@ -129,11 +91,11 @@ document.getElementById("form_ajouter").addEventListener("submit", (e) => {
         const nom = document.getElementById("nom");
         const Genre = document.getElementById("input_Genre");
         const Description = document.getElementById("Description");
-        Vidage_champs([nom , Genre , Description]) ;
+        Vidage_champs([nom, Genre, Description]);
         document.getElementById("ajouter_message").removeAttribute("hidden")
-        setTimeout(()=> {
-            document.getElementById("ajouter_message").setAttribute("hidden" , "")
-        },2000)
+        setTimeout(() => {
+            document.getElementById("ajouter_message").setAttribute("hidden", "")
+        }, 2000)
     }
 
 
@@ -143,24 +105,24 @@ document.getElementById("form_ajouter").addEventListener("submit", (e) => {
 
 // ================ Afficher Detail d'une serie =================
 
-function AfficherDetail(serie){
+function AfficherDetail(serie) {
 
     console.log(serie);
-    
-    document.getElementById("detail").removeAttribute("hidden") ;
-    document.getElementById("AfficherFilms").setAttribute("hidden" , "") ;
-    document.getElementById("section_ajouter").setAttribute("hidden" , "") ;
-    document.getElementById("section_hero").setAttribute("hidden" , "") ;
 
-    document.getElementById("image_serie").src = serie.image.original ;
-    document.getElementById("name_serie").textContent = serie.name ;
-    serie.genres.forEach( g => {
-        const genre = document.createElement("p") ;
-        genre.textContent = g ;
-        document.getElementById("div_genre").append(genre) ;
+    document.getElementById("detail").removeAttribute("hidden");
+    document.getElementById("AfficherFilms").setAttribute("hidden", "");
+    document.getElementById("section_ajouter").setAttribute("hidden", "");
+    document.getElementById("section_hero").setAttribute("hidden", "");
+
+    document.getElementById("image_serie").src = serie.image.original;
+    document.getElementById("name_serie").textContent = serie.name;
+    serie.genres.forEach(g => {
+        const genre = document.createElement("p");
+        genre.textContent = g;
+        document.getElementById("div_genre").append(genre);
     })
-    document.getElementById("discription").innerHTML = serie.summary ;
+    document.getElementById("discription").innerHTML = serie.summary;
 
-    
+
 
 }
