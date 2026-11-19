@@ -12,12 +12,19 @@ export async function getSeriesFilter(Params) {
 
 
 // create serie
-export async function AddSerie(serie) {
-    return await api.post('/series', serie);
-
+export async function AddSerie(serie) { 
+    try {
+        
+        const res = await api.post('/series', serie);
+        console.log(res);
+    } catch (error) {
+        return error ;
+        
+    }   
+    
 }
 
 // delete serie
-export async function deleteSerie(IdSerie){
-    return await api.delete(`/series/${IdSerie}`)
+export async function deleteSerie(){
+    return await api.delete(`/series/${43}`)
 }
